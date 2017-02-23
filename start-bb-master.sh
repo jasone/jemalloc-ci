@@ -2,7 +2,11 @@
 
 set -e
 
-if [[ ! -e ~/secrets/ ]]; then
+if [[ -z $SECRETS ]]; then
+  SECRETS="$HOME/secrets"
+fi
+
+if [[ ! -e "$SECRETS" ]]; then
   echo "Couldn't find a secrets dir!"
   exit 1
 fi

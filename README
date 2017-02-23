@@ -1,6 +1,6 @@
 These scripts simplify bringing up buildbot worker and master nodes.
 
-They rely on various config data placed in json files in a "~/secrets"
+They rely on various config data placed in json files in a SECRETS="~/secrets"
 directory.
 
 The files:
@@ -62,7 +62,7 @@ To set up the worker (currently, only ubuntu and freebsd are supported):
 ./setup-[ubuntu|freebsd]-worker-system.sh
 WORKER_UNIX_SECRETS_FILE=[ubuntu|freebsd]_unix_secrets.json ./setup-worker-account.sh
 (after su-ing to the worker, in the worker's checkout of jemalloc-ci):
-./setup-bb-worker.sh
+WORKER_BB_SECRETS_FILE=[ubuntu|freebsd]_bb_secrets.json ./setup-bb-worker.sh
 ./start-bb-worker.sh
 
 To set up a master, root's secrets directory must include

@@ -3,17 +3,21 @@
 set -e
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+if [[ -z $SECRETS ]]; then
+  SECRETS="$HOME/secrets"
+fi
+
 if [[ -z $WORKER_BB_SECRETS_FILE ]]; then
-  echo "Need WORKER_BB_SECRETS_FILE=[ubuntu|freebsd]_bb_secrets.json defined!"
+  echo "Need WORKER_BB_SECRETS_FILE=/path/to/[ubuntu|freebsd]_bb_secrets.json defined!"
   exit 1
 fi
 
-FILENAME="~/secrets/$WORKER_BB_SECRETS_FILE"
+FILENAME="$SECRETS/$WORKER_BB_SECRETS_FILE"
 
-BB_UN=`jq --raw-output '.["bb_un"]' ~/secrets/"$WORKER_BB_SECRETS_FILE"`
-BB_PW=`jq --raw-output '.["bb_pw"]' ~/secrets/"$WORKER_BB_SECRETS_FILE"`
+BB_UN=`jq --raw-output '.["bb_un"]' "$SECRETS/$WORKER_BB_SECRETS_FILE"`
+BB_PW=`jq --raw-output '.["bb_pw"]' "$SECRETS/$WORKER_BB_SECRETS_FILE"`
 
-MASTER_HOST=`jq --raw-output '.["master_host"]' ~/secrets/public.json`
+MASTER_HOST=`jq --raw-output '.["master_host"]' "$SECRETS/public.json"`
 
 if [[ -z $MASTER_HOST || -z $BB_UN || -z $BB_PW ]]; then
   echo "Trouble obtaining secrets"
