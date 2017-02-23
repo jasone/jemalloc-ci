@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 
-source "$SCRIPT_DIR/../bash_fns/detect_os.sh"
-source "$SCRIPT_DIR/../bash_fns/mkuser.sh"
+source "$SCRIPT_DIR/bash_fns/detect_os.sh"
+source "$SCRIPT_DIR/bash_fns/mkuser.sh"
 
 UNIX_UN=`jq --raw-output '.["unix_un"]' ~/secrets/master_unix_secrets.json`
 UNIX_PW=`jq --raw-output '.["unix_pw"]' ~/secrets/master_unix_secrets.json`
